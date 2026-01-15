@@ -1,45 +1,32 @@
-export default function App() {
-  //App renderiza a ParentComponent
-  return <ParentComponent />;
-}
+function App() {
+  const users = [
+    { id: 1, name: 'Jose', role: 'Web Developer' },
+    { id: 2, name: 'Estefanía', role: 'Web Designer' },
+    { id: 3, name: 'Rubén', role: 'Team Leader' },
+  ]
 
-function ParentComponent() {
-  //ParentComponent renderiza los tres en orden
   return (
     <>
-      <UserComponent />
-      <ProfileComponent />
-      <FeedComponent />
-    </>
-  );
-}
-function UserComponent() {
-  return (
-    <div>
-      <h2>Nombre: Estefania Castellanos</h2>
-      <p>Estado: En línea</p>
-    </div>
-  );
-}
-
-function ProfileComponent() {
-  return (
-    <div>
-      <h2>Perfil de Usuario</h2>
-      <p>Bio: Hola Buenos dias.</p>
-    </div>
-  );
-}
-
-function FeedComponent() {
-  return (
-    <div>
-      <h2>Últimas publicaciones</h2>
+      <p>Lista de usuarios activos:</p>
       <ul>
-        <li>Aprendiendo componentes en React</li>
-        <li>Mi primer proyecto con Vite</li>
-        <li>Holi klara</li>
+        {users.map(function (user) {
+          // Asignamos una clase según el rol
+          let roleClass = ''
+          if (user.role === 'Team Leader') {
+            roleClass = 'admin-style'
+          } else {
+            roleClass = 'user-style'
+          }
+
+          return (
+            <li key={user.id} className={roleClass}>
+              {user.name} — {user.role}
+            </li>
+          )
+        })}
       </ul>
-    </div>
-  );
+    </>
+  )
 }
+
+export default App;
