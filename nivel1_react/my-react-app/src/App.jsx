@@ -1,32 +1,25 @@
-function App() {
-  const users = [
-    { id: 1, name: 'Jose', role: 'Web Developer' },
-    { id: 2, name: 'Estefanía', role: 'Web Designer' },
-    { id: 3, name: 'Rubén', role: 'Team Leader' },
-  ]
+import { useState } from "react";
 
-  return (
-    <>
-      <p>Lista de usuarios activos:</p>
-      <ul>
-        {users.map(function (user) {
-          // Asignamos una clase según el rol
-          let roleClass = ''
-          if (user.role === 'Team Leader') {
-            roleClass = 'admin-style'
-          } else {
-            roleClass = 'user-style'
-          }
+function ParentComponent() {
+  const [name, setName] = useState("Juanaco");
 
-          return (
-            <li key={user.id} className={roleClass}>
-              {user.name} — {user.role}
-            </li>
-          )
-        })}
-      </ul>
-    </>
-  )
+  return <ChildComponent name={name} setName={setName} />;
 }
 
-export default App;
+function ChildComponent(props) {
+  return (
+    <>
+      <h1>Hello {props.name}</h1>
+      
+      <button onClick={() => props.setName("Juanky")}>
+        Change to Juanky
+      </button>
+
+      <button onClick={() => props.setName("Iker")}>
+        Change to Iker
+      </button>
+    </>
+  );
+}
+
+export default ParentComponent;
