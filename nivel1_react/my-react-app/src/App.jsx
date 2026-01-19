@@ -1,25 +1,26 @@
-import { useState } from "react";
+import { useState } from 'react'
+export default function App() {
+const [user, setUser] = useState(null)
+const [newEmails, setNewEmails] = useState(0)
+const button = user
+? <button onClick={() => setUser(null)}>Logout</button>
+: <button onClick={() => setUser({ name: 'Antoñico'
+})}>Login</button>
+return (
+<>
+<h1>Nivel 5: Renderizado condicional</h1>
+{button}
 
-function ParentComponent() {
-  const [name, setName] = useState("Juanaco");
 
-  return <ChildComponent name={name} setName={setName} />;
+{user ? <p>Bienvenido, {user.name}.</p> : <p>Inicia sesión para
+continuar.</p>}
+<hr />
+<button onClick={() => setNewEmails((n) => n + 1)}>+1
+email</button>
+<button onClick={() => setNewEmails(0)}>Reset</button>
+{newEmails > 0 && (
+<h2>Tienes {newEmails} correos nuevos.</h2>
+)}
+</>
+)
 }
-
-function ChildComponent(props) {
-  return (
-    <>
-      <h1>Hello {props.name}</h1>
-      
-      <button onClick={() => props.setName("Juanky")}>
-        Change to Juanky
-      </button>
-
-      <button onClick={() => props.setName("Iker")}>
-        Change to Iker
-      </button>
-    </>
-  );
-}
-
-export default ParentComponent;
