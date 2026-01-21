@@ -1,26 +1,61 @@
 import { useState } from 'react'
-export default function App() {
-const [user, setUser] = useState(null)
-const [newEmails, setNewEmails] = useState(0)
-const button = user
-? <button onClick={() => setUser(null)}>Logout</button>
-: <button onClick={() => setUser({ name: 'Antoñico'
-})}>Login</button>
-return (
-<>
-<h1>Nivel 5: Renderizado condicional</h1>
-{button}
 
+function App() {
+  // 1. Estado para el toggle (booleano)
+  const [showInfo, setShowInfo] = useState(true)
+  
+  // 2. Estado para el contador (numérico)
+  const [count, setCount] = useState(0)
+  
+  // 3. Estado para el modo (string)
+  const [mode, setMode] = useState('')
 
-{user ? <p>Bienvenido, {user.name}.</p> : <p>Inicia sesión para
-continuar.</p>}
-<hr />
-<button onClick={() => setNewEmails((n) => n + 1)}>+1
-email</button>
-<button onClick={() => setNewEmails(0)}>Reset</button>
-{newEmails > 0 && (
-<h2>Tienes {newEmails} correos nuevos.</h2>
-)}
-</>
-)
+  // Lógica del contador (mínimo 0)
+  const handleDecrement = () => {
+    if (count > 0) {
+      setCount(count - 1)
+    }
+  }
+
+  return (
+    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+      <h1>Panel de Control</h1>
+
+      {/* REQUISITO 1 y 4: Toggle con texto dinámico */}
+      <div style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
+        <button onClick={() => setShowInfo(!showInfo)}>
+          {showInfo ? 'Ocultar' : 'Mostrar'} Detalles
+        </button>
+
+        {showInfo && (
+          <p style={{ background: '#f0f0f0', padding: '10px' }}>
+            Este es el contenido secreto que aparece y desaparece.
+          </p>
+        )}
+      </div>
+
+      {/* REQUISITO 2: Contador con límite 0 */}
+      <div style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
+        <h3>Contador: {count}</h3>
+        <button onClick={handleDecrement}>-1</button>
+        <button onClick={() => setCount(count + 1)} style={{ marginLeft: '5px' }}>
+          +1
+        </button>
+      </div>
+
+      {/* REQUISITO 3: Input en tiempo real */}
+      <div>
+        <h3>Selector de Modo</h3>
+        <input 
+          type="text" 
+          placeholder="Ej: turbo, stealth..." 
+          value={mode}
+          onChange={(e) => setMode(e.target.value)}
+        />
+        <p>Modo actual: <strong>{mode || 'Esperando...'}</strong></p>
+      </div>
+    </div>
+  )
 }
+
+export default App
