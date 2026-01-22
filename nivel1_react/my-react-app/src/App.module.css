@@ -1,0 +1,14 @@
+/* 2. Clase base y dos clases específicas */
+.baseText {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+}
+
+.success {
+  color: #27ae60;
+}
+
+.error {
+  color: #c0392b;
+  text-decoration: underline;
+}
